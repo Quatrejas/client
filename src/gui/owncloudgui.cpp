@@ -190,6 +190,12 @@ void ownCloudGui::slotTrayClicked( QSystemTrayIcon::ActivationReason reason )
         }
     }
 #endif
+
+    // Might be hidden by other apps, bring them back
+    Q_FOREACH(const QPointer<ShareDialog> shareDialog, _shareDialogs) {
+        Q_ASSERT(shareDialog.data());
+        raiseDialog(shareDialog);
+    }
 }
 
 void ownCloudGui::slotSyncStateChange( Folder* folder )
